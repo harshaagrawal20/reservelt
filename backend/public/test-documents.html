@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Generation Test</title>
+  <style>
+    body { font-family: 'Segoe UI', 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    .header { border-bottom: 2px solid #4a86e8; padding-bottom: 20px; margin-bottom: 30px; }
+    .logo { font-size: 28px; font-weight: bold; color: #4a86e8; }
+    .section { margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    h1 { color: #4a86e8; margin-top: 0; }
+    h2 { color: #666; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input { padding: 10px; width: 100%; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+    button { padding: 10px 15px; background-color: #4a86e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background-color 0.3s; }
+    button:hover { background-color: #3b78e7; }
+    .result { margin-top: 15px; padding: 15px; background-color: #f5f5f5; border-radius: 5px; border-left: 4px solid #4a86e8; transition: all 0.3s ease; }
+    .error { color: #d32f2f; background-color: #ffebee; border-left-color: #d32f2f; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .success { color: #388e3c; background-color: #e8f5e9; border-left-color: #388e3c; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .download-btn { background-color: #388e3c; }
+    .download-btn:hover { background-color: #2e7d32; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">RENTAL MANAGEMENT SYSTEM</div>
+      <h1>Document Generation Test</h1>
+    </div>
+    
+    <div class="section">
+      <h2>Generate Invoice</h2>
+      <div class="form-group">
+        <label for="invoiceBookingId">Booking ID:</label>
+        <input type="text" id="invoiceBookingId" placeholder="Enter booking ID">
+      </div>
+      <button onclick="generateInvoice()">Generate Invoice</button>
+      <div id="invoiceResult" class="result"></div>
+      <button id="downloadInvoiceBtn" class="download-btn" style="display: none;" onclick="downloadInvoice()">Download Invoice</button>
+    </div>
+    
+    <div class="section">
+      <h2>Generate Rental Agreement</h2>
+      <div class="form-group">
+        <label for="agreementBookingId">Booking ID:</label>
+        <input type="text" id="agreementBookingId" placeholder="Enter booking ID">
+      </div>
+      <button onclick="generateRentalAgreement()">Generate Rental Agreement</button>
+      <div id="agreementResult" class="result"></div>
+      <button id="downloadAgreementBtn" class="download-btn" style="display: none;" onclick="downloadDocument('agreement')">Download Agreement</button>
+    </div>
+    
+    <div class="section">
+      <h2>Generate Pickup Document</h2>
+      <div class="form-group">
+        <label for="pickupBookingId">Booking ID:</label>
+        <input type="text" id="pickupBookingId" placeholder="Enter booking ID">
+      </div>
+      <button onclick="generatePickupDocument()">Generate Pickup Document</button>
+      <div id="pickupResult" class="result"></div>
+      <button id="downloadPickupBtn" class="download-btn" style="display: none;" onclick="downloadDocument('pickup')">Download Pickup Document</button>
+    </div>
+    
+    <div class="section">
+      <h2>Generate Return Document</h2>
+      <div class="form-group">
+        <label for="returnBookingId">Booking ID:</label>
+        <input type="text" id="returnBookingId" placeholder="Enter booking ID">
+      </div>
+      <button onclick="generateReturnDocument()">Generate Return Document</button>
+      <div id="returnResult" class="result"></div>
+      <button id="downloadReturnBtn" class="download-btn" style="display: none;" onclick="downloadDocument('return')">Download Return Document</button>
+    </div>
+
+  <script>
+    // Generate invoice
+    async function generateInvoice() {
+      const bookingId = document.getElementById('invoiceBookingId').value;
+      if (!bookingId) {
+        showError('invoiceResult', 'Please enter a booking ID');
+        return;
+      }
+      
+      try {
+        showLoading('invoiceResult', 'Generating invoice...');
+        const response = await fetch(`/api/test/generate-invoice/${bookingId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          showSuccess('invoiceResult', `Invoice generated successfully! <br>Invoice Number: <strong>${data.invoice.invoiceNumber}</strong>`);
+          document.getElementById('downloadInvoiceBtn').style.display = 'block';
+          document.getElementById('downloadInvoiceBtn').setAttribute('data-id', data.invoice._id);
+        } else {
+          showError('invoiceResult', `Error: ${data.message}`);
+        }
+      } catch (error) {
+        showError('invoiceResult', `Error: ${error.message}`);
+      }
+    }
+    
+    // Download invoice
+    function downloadInvoice() {
+      const invoiceId = document.getElementById('downloadInvoiceBtn').getAttribute('data-id');
+      if (invoiceId) {
+        window.open(`/api/test/download-invoice/${invoiceId}`, '_blank');
+      }
+    }
+    
+    // Generate rental agreement
+    async function generateRentalAgreement() {
+      const bookingId = document.getElementById('agreementBookingId').value;
+      if (!bookingId) {
+        showError('agreementResult', 'Please enter a booking ID');
+        return;
+      }
+      
+      try {
+        showLoading('agreementResult', 'Generating rental agreement...');
+        const response = await fetch(`/api/test/generate-rental-agreement/${bookingId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          showSuccess('agreementResult', `Rental agreement generated successfully! <br>Document Number: <strong>${data.document.documentNumber || 'N/A'}</strong>`);
+          document.getElementById('downloadAgreementBtn').style.display = 'block';
+          document.getElementById('downloadAgreementBtn').setAttribute('data-id', data.document._id);
+        } else {
+          showError('agreementResult', `Error: ${data.message}`);
+        }
+      } catch (error) {
+        showError('agreementResult', `Error: ${error.message}`);
+      }
+    }
+    
+    // Generate pickup document
+    async function generatePickupDocument() {
+      const bookingId = document.getElementById('pickupBookingId').value;
+      if (!bookingId) {
+        showError('pickupResult', 'Please enter a booking ID');
+        return;
+      }
+      
+      try {
+        showLoading('pickupResult', 'Generating pickup document...');
+        const response = await fetch(`/api/test/generate-pickup-document/${bookingId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          showSuccess('pickupResult', `Pickup document generated successfully! <br>Document Number: <strong>${data.document.documentNumber}</strong>`);
+          document.getElementById('downloadPickupBtn').style.display = 'block';
+          document.getElementById('downloadPickupBtn').setAttribute('data-id', data.document._id);
+        } else {
+          showError('pickupResult', `Error: ${data.message}`);
+        }
+      } catch (error) {
+        showError('pickupResult', `Error: ${error.message}`);
+      }
+    }
+    
+    // Generate return document
+    async function generateReturnDocument() {
+      const bookingId = document.getElementById('returnBookingId').value;
+      if (!bookingId) {
+        showError('returnResult', 'Please enter a booking ID');
+        return;
+      }
+      
+      try {
+        showLoading('returnResult', 'Generating return document...');
+        const response = await fetch(`/api/test/generate-return-document/${bookingId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          showSuccess('returnResult', `Return document generated successfully! <br>Document Number: <strong>${data.document.documentNumber}</strong>`);
+          document.getElementById('downloadReturnBtn').style.display = 'block';
+          document.getElementById('downloadReturnBtn').setAttribute('data-id', data.document._id);
+        } else {
+          showError('returnResult', `Error: ${data.message}`);
+        }
+      } catch (error) {
+        showError('returnResult', `Error: ${error.message}`);
+      }
+    }
+    
+    // Download document
+    function downloadDocument(type) {
+      let documentId;
+      
+      switch(type) {
+        case 'agreement':
+          documentId = document.getElementById('downloadAgreementBtn').getAttribute('data-id');
+          break;
+        case 'pickup':
+          documentId = document.getElementById('downloadPickupBtn').getAttribute('data-id');
+          break;
+        case 'return':
+          documentId = document.getElementById('downloadReturnBtn').getAttribute('data-id');
+          break;
+      }
+      
+      if (documentId) {
+        window.open(`/api/test/download-document/${documentId}`, '_blank');
+      }
+    }
+    
+    // Helper functions for UI feedback
+    function showLoading(elementId, message) {
+      const element = document.getElementById(elementId);
+      element.className = 'result';
+      element.innerHTML = `<div>${message}</div>`;
+    }
+    
+    function showSuccess(elementId, message) {
+      const element = document.getElementById(elementId);
+      element.className = 'result success';
+      element.innerHTML = message;
+    }
+    
+    function showError(elementId, message) {
+      const element = document.getElementById(elementId);
+      element.className = 'result error';
+      element.innerHTML = message;
+    }
+  </script>
+</body>
+</html>
