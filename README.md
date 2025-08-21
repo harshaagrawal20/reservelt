@@ -21,41 +21,44 @@ Traditional rental operations are error-prone and manual: scheduling clashes, sc
 
 ---
 
-## 👥 Roles
 
-- **Customer**  
-  Makes the booking and payment.
+## Example .env Configuration
 
-- **End User**  
-  Actually uses the rented product (may or may not be the same as the Customer).
+Create a `.env` file in your project root with the following structure:
 
-> *(Optional future roles: Admin, Staff, Vendor)*
+```env
+PORT=3000
+NODE_ENV=development
+MONGODB_URI=your_mongodb_connection_string
+CLIENT_URL=http://localhost:5173
 
----
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 
-## 🚀 Key Features
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_email_password
+EMAIL_SERVICE=gmail
 
-- 🔎 Product catalog with real-time availability
-- 📅 Date/time picker with blackout & maintenance rules
-- 💳 Online checkout (coupons, taxes, deposits)
-- 💼 Flexible pricing (hour/week/month/year per product)
-- 🧾 Order management (amendments, cancellations, refunds)
-- 📧 Notifications (email/SMS) for confirmations & reminders
-- 📊 Basic reporting (utilization, revenue, top products)
-- 🔐 Role-aware access and audit logs
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 
----
+VITE_API_BASE_URL=http://localhost:3000/api
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 
-## 🧮 Pricing Models
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=1d
+FRONTEND_URL=http://localhost:5173
 
-Per product, configure any mix of:
-- **Hourly**: Ideal for short-term rentals
-- **Daily/Weekly/Monthly/Yearly**: Tiered rates & discounts
-- **Custom Rules**: Minimum duration, weekend/seasonal rates, deposits
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+SESSION_SECRET=your_session_secret
+```
 
----
-
-## 🗂 Data Model (High-Level)
+**Note:** Replace all `your_*` values with your actual credentials. Never commit real secrets to your repository!
 
 - **Product**: name, description, media, SKU, stock/quantity  
 - **PricingRule**: unit (hour/week/month/year), rate, min/max duration, seasonal rules  
@@ -71,12 +74,12 @@ Per product, configure any mix of:
 
 > Replace with your stack. Example:
 
-- **Frontend**: Next.js / React  
+- **Frontend**:  React  
 - **Backend**: Node.js (Express/Nest)  
 - **Database**: PostgreSQL / MongoDB  
-- **Auth**: JWT / OAuth  
-- **Payments**: Stripe / Razorpay  
-- **Infra**: Docker, CI/CD (GitHub Actions)
+- **Auth**: clerk 
+- **Payments**: Stripe 
+
 
 ---
 
