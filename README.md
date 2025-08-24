@@ -8,7 +8,7 @@
 
 **Reservelt** streamlines the rental workflow for businesses and customers:
 
-- Browse available products
+- Browse available products 
 - Reserve dates/times with live availability
 - Flexible pricing per product (hourly/weekly/monthly/yearly)
 - Seamless checkout and booking confirmation

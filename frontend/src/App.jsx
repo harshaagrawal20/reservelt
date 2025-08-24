@@ -70,11 +70,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: (
-      <SignedIn>
-        <Dashboard />
-      </SignedIn>
-    )
+    element: <Dashboard />
   },
       {
         path: 'products',
