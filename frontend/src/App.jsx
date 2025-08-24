@@ -57,11 +57,11 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path: '/sign-in/*',
+    path: '/sign-in',
     element: <SignInPage />
   },
   {
-    path: '/sign-up/*',
+    path: '/sign-up',
     element: <SignUpPage />
   },
   {
