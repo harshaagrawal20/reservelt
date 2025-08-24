@@ -1,6 +1,6 @@
 // App.jsx
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
-import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import './App.css'
 
