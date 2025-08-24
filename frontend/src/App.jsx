@@ -52,294 +52,47 @@ import TutorialProvider from './components/Tutorial/TutorialProvider'
 
 // Router Config
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />
-  },
-  {
-    path: '/sign-in',
-    element: <SignInPage />
-  },
-  {
-    path: '/sign-up',
-    element: <SignUpPage />
-  },
-  {
-    path: '/admin-login',
-    element: <AdminLoginPage />
-  },
-  {
-    path: '/dashboard',
-    element: <Dashboard />
-  },
-      {
-        path: 'products',
-        element: (
-          <SignedIn>
-            <Products />
-          </SignedIn>
-        )
-      },
-      {
-        path: 'browse-products',
-        element: (
-          <SignedIn>
-            <BrowseProducts />
-          </SignedIn>
-        )
-      },
-      {
-        path: 'orders',
-        element: (
-          <SignedIn>
-            <Orders />
-          </SignedIn>
-        )
-      },
-      {
-        path: 'orders/new',
-        element: (
-          <SignedIn>
-            <RentalOrderForm />
-          </SignedIn>
-        )
-      },
-      {
-        path: 'orders/:orderId',
-        element: (
-          <SignedIn>
-            <BookingDetails />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/pickup',
-    element: (
-      <SignedIn>
-        <PickupOrder />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/pickup/:pickupId',
-    element: (
-      <SignedIn>
-        <PickupOrder />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/return',
-    element: (
-      <SignedIn>
-        <ReturnOrder />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/return/:returnId',
-    element: (
-      <SignedIn>
-        <ReturnOrder />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/inventory',
-    element: (
-      <SignedIn>
-        <ProductInventory />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/products/configure',
-    element: (
-      <SignedIn>
-        <ProductConfiguration />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/products/configure/:productId',
-    element: (
-      <SignedIn>
-        <ProductConfiguration />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/catalog',
-    element: (
-      <SignedIn>
-        <ProductCatalog />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/products/:productId',
-    element: (
-      <SignedIn>
-        <ProductDetails />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/quote',
-    element: (
-      <SignedIn>
-        <QuoteOrder />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/quote/:quoteId',
-    element: (
-      <SignedIn>
-        <QuoteOrder />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/delivery',
-    element: (
-      <SignedIn>
-        <DeliveryManagement />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/customer-portal',
-    element: (
-      <SignedIn>
-        <CustomerPortal />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/customers',
-    element: (
-      <SignedIn>
-        <Customers />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/reports',
-    element: (
-      <SignedIn>
-        <Reports />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/settings',
-    element: (
-      <SignedIn>
-        <Settings />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/notifications',
-    element: (
-      <SignedIn>
-        <Notifications />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/payment',
-    element: (
-      <SignedIn>
-        <Payment />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/payment-status',
-    element: (
-      <SignedIn>
-        <PaymentStatus />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/payment-page',
-    element: (
-      <SignedIn>
-        <PaymentPage />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/payment-success',
-    element: (
-      <SignedIn>
-        <PaymentSuccessPage />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/animations-demo',
-    element: (
-      <SignedIn>
-        <AnimationDemo />
-      </SignedIn>
-    )
-  },
-  {
-    path: '/admin',
-    element: (
-      <AdminRoute>
-        <AdminDashboardRedux />
-      </AdminRoute>
-    )
-  },
-  {
-    path: '/admin/users',
-    element: (
-      <AdminRoute>
-        <AdminUserManagement />
-      </AdminRoute>
-    )
-  },
-  {
-    path: '/admin/products',
-    element: (
-      <AdminRoute>
-        <AdminProductManagementRedux />
-      </AdminRoute>
-    )
-  },
-  {
-    path: '/admin/orders',
-    element: (
-      <AdminRoute>
-        <AdminOrderManagementRedux />
-      </AdminRoute>
-    )
-  },
-  {
-    path: '/admin/reports',
-    element: (
-      <AdminRoute>
-        <AdminReports />
-      </AdminRoute>
-    )
-  },
-  {
-    path: '/protected',
-    element: (
-      <SignedOut>
-        <Navigate to="/sign-in" replace />
-      </SignedOut>
-    )
-  },
-  {
-    path: '*',
-    element: <Navigate to="/" replace />
-  }
+  { path: '/', element: <Home /> },
+  { path: '/sign-in', element: <SignInPage /> },
+  { path: '/sign-in/*', element: <SignInPage /> },
+  { path: '/sign-up', element: <SignUpPage /> },
+  { path: '/sign-up/*', element: <SignUpPage /> },
+  { path: '/admin-login', element: <AdminLoginPage /> },
+  { path: '/dashboard', element: <Dashboard /> },
+  { path: '/products', element: <SignedIn><Products /></SignedIn> },
+  { path: '/browse-products', element: <SignedIn><BrowseProducts /></SignedIn> },
+  { path: '/orders', element: <SignedIn><Orders /></SignedIn> },
+  { path: '/orders/new', element: <SignedIn><RentalOrderForm /></SignedIn> },
+  { path: '/orders/:orderId', element: <SignedIn><BookingDetails /></SignedIn> },
+  { path: '/pickup', element: <SignedIn><PickupOrder /></SignedIn> },
+  { path: '/pickup/:pickupId', element: <SignedIn><PickupOrder /></SignedIn> },
+  { path: '/return', element: <SignedIn><ReturnOrder /></SignedIn> },
+  { path: '/return/:returnId', element: <SignedIn><ReturnOrder /></SignedIn> },
+  { path: '/inventory', element: <SignedIn><ProductInventory /></SignedIn> },
+  { path: '/products/configure', element: <SignedIn><ProductConfiguration /></SignedIn> },
+  { path: '/products/configure/:productId', element: <SignedIn><ProductConfiguration /></SignedIn> },
+  { path: '/catalog', element: <SignedIn><ProductCatalog /></SignedIn> },
+  { path: '/products/:productId', element: <SignedIn><ProductDetails /></SignedIn> },
+  { path: '/quote', element: <SignedIn><QuoteOrder /></SignedIn> },
+  { path: '/quote/:quoteId', element: <SignedIn><QuoteOrder /></SignedIn> },
+  { path: '/delivery', element: <SignedIn><DeliveryManagement /></SignedIn> },
+  { path: '/customer-portal', element: <SignedIn><CustomerPortal /></SignedIn> },
+  { path: '/customers', element: <SignedIn><Customers /></SignedIn> },
+  { path: '/reports', element: <SignedIn><Reports /></SignedIn> },
+  { path: '/settings', element: <SignedIn><Settings /></SignedIn> },
+  { path: '/notifications', element: <SignedIn><Notifications /></SignedIn> },
+  { path: '/payment', element: <SignedIn><Payment /></SignedIn> },
+  { path: '/payment-status', element: <SignedIn><PaymentStatus /></SignedIn> },
+  { path: '/payment-page', element: <SignedIn><PaymentPage /></SignedIn> },
+  { path: '/payment-success', element: <SignedIn><PaymentSuccessPage /></SignedIn> },
+  { path: '/animations-demo', element: <SignedIn><AnimationDemo /></SignedIn> },
+  { path: '/admin', element: <AdminRoute><AdminDashboardRedux /></AdminRoute> },
+  { path: '/admin/users', element: <AdminRoute><AdminUserManagement /></AdminRoute> },
+  { path: '/admin/products', element: <AdminRoute><AdminProductManagementRedux /></AdminRoute> },
+  { path: '/admin/orders', element: <AdminRoute><AdminOrderManagementRedux /></AdminRoute> },
+  { path: '/admin/reports', element: <AdminRoute><AdminReports /></AdminRoute> },
+  { path: '/protected', element: <SignedOut><Navigate to="/sign-in" replace /></SignedOut> },
+  { path: '*', element: <Navigate to="/" replace /> }
 ])
 
 function App() {
