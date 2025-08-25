@@ -39,7 +39,7 @@ const AdminLoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3000/api/users/admin/login', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'}/users/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const AdminLoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3000/api/users/admin/verify-otp', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'}/users/admin/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ const AdminLoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3000/api/users/admin/login', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'}/users/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
